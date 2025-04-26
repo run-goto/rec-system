@@ -1,0 +1,22 @@
+name: 'InterestRecall子图'
+type: 'subgraph'
+configs:
+  configKey1: '默认值Value'
+nodes:
+  - name: 'movieSource'
+    op: 'movieRecallOperator'
+    depends: []
+    configs:
+      filePath: 'ml-latest-small/movies.csv'
+      parser: 'MovieParser'
+  - name: 'ratingSource'
+    op: 'ratingRecallOperator'
+    depends: []
+    configs:
+      filePath: 'ml-latest-small/ratings.csv'
+      parser: 'RatingParser'
+  - name: 'interestRecall'
+    op: 'InterestRecallOperator'
+    depends: ['movieSource', 'ratingSource']
+    configs:
+      targetUserId: 1
