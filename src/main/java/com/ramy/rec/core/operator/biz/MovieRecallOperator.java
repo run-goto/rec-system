@@ -16,7 +16,7 @@ public class MovieRecallOperator implements Operator<String, Movie> {
     }
 
     @Override
-    public DataSet<Movie> run(ComputeContext computeContext, DataSource<String> datasource, DataSet<?>... inputs) {
+    public DataSet<Movie> run(ComputeContext computeContext,  DataSet<?>... inputs) {
         return csvDataSource.getGlobalMovies();
     }
 }

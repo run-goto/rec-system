@@ -18,7 +18,8 @@ public class MapOperator<I, O> implements Operator<I, O> {
     }
 
     @Override
-    public DataSet<O> run(ComputeContext computeContext, DataSource<I> datasource, DataSet<?>... inputs) {
+    public DataSet<O> run(ComputeContext computeContext, DataSet<?>... inputs) {
+        DataSet<I> datasource = (DataSet<I>) inputs[0];
         List<I> inputData = datasource.getData();
         List<O> mappedData = inputData.stream().map(mapper).collect(Collectors.toList());
         return new DataSet<>(mappedData);

@@ -1,7 +1,6 @@
 package com.ramy.rec.core.operator.biz;
 
 
-
 import com.ramy.rec.core.ComputeContext;
 import com.ramy.rec.core.DataSet;
 import com.ramy.rec.core.DataSource;
@@ -22,7 +21,7 @@ public class InterestRecallOperator implements Operator<Rating, Movie> {
     }
 
     @Override
-    public DataSet<Movie> run(ComputeContext computeContext, DataSource<Rating> datasource, DataSet<?>... inputs) {
+    public DataSet<Movie> run(ComputeContext computeContext, DataSet<?>... inputs) {
         if (inputs.length != 2) {
             throw new IllegalArgumentException("InterestRecallOperator requires exactly two input DataSets.");
         }
@@ -63,7 +62,7 @@ public class InterestRecallOperator implements Operator<Rating, Movie> {
 
         // Filter movies using FilterOperator
         FilterOperator<Movie> filterOperator = new FilterOperator<>(moviePredicate);
-        DataSet<Movie> filteredMovies = filterOperator.run(computeContext, () -> moviesDataSet.getData());
+        DataSet<Movie> filteredMovies = filterOperator.run(computeContext, moviesDataSet);
 
         // Sort recommended movies based on their preferred genre index
         Comparator<Movie> movieComparator = Comparator.comparingInt(movie -> {

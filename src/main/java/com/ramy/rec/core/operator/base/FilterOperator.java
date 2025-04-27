@@ -18,8 +18,9 @@ public class FilterOperator<T> implements Operator<T, T> {
     }
 
     @Override
-    public DataSet<T> run(ComputeContext computeContext, DataSource<T> datasource, DataSet<?>... inputs) {
-        List<T> inputData = datasource.getData();
+    public DataSet<T> run(ComputeContext computeContext, DataSet<?>... inputs) {
+        DataSet<?> dataSet = inputs[0];
+        List<T> inputData = (List<T>) dataSet.getData();
         List<T> filteredData = inputData.stream().filter(predicate).collect(Collectors.toList());
         return new DataSet<>(filteredData);
     }

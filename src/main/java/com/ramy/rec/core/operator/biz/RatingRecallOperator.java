@@ -20,7 +20,7 @@ public class RatingRecallOperator implements Operator<String, Rating> {
     }
 
     @Override
-    public DataSet<Rating> run(ComputeContext computeContext, DataSource<String> datasource, DataSet<?>... inputs) {
+    public DataSet<Rating> run(ComputeContext computeContext, DataSet<?>... inputs) {
         return csvDataSource.getGlobalRatings();
     }
 }
